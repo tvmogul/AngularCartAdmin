@@ -1,0 +1,636 @@
+﻿<!doctype html>
+<html ng-app="AngularStore">
+<head>
+    <title>AngularJS Responsive Mobile Shopping Cart with Video</title>
+    <script>document.write('<base href="' + document.location + '" />');</script>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="no-cache">
+    <meta http-equiv="Expires" content="-1">
+    <meta http-equiv="CACHE-CONTROL" content="NO-CACHE">
+    <meta http-equiv="CACHE-CONTROL" content="NO-STORE">
+    <meta name="description" content="Free Google AngularJS Shopping Cart, AngularJS Shopping Cart, Shopping Cart, Online Shopping Cart for ANY Size Business!, no database or php, only Html, Css, and Javascript.">
+    <meta name="keywords" content="Free Google AngularJS shopping cart, products, ecommerce, shopping, money, responsive, PayPal, angularjs, angular, filter, search, table, store, store">
+
+    <link rel="shortcut icon" href="ac_img/favicon.ico" />
+
+    <!-- FIX Enables web page(.htm) to load jQuery & scripts in WebBrowser Control -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <!-- END FIX -->
+    <!-- FIX -->
+    <script type="text/javascript">
+        function blockError() { return true; }
+        window.onerror = blockError;
+    </script>
+    <!-- END FIX -->
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="ac_js/html5shiv.js"></script>
+      <script src="ac_js/respond.min.js"></script>
+    <![endif]-->
+    <!-- Bootstrap -->
+    <!-- The file bootstrap-combined.min.css is for Bootstrap v2, it is the combined css file of bootstrap.css
+    (the main css file) and bootstrap-responsive.css (the responsive Bootstrap styles). It's exactly the same as
+    using those two files separately but it just saves you an extra request. We are using Bootstrap 3 plus here! -->
+
+    <link href="ac_css/bootstrap.css" rel="stylesheet" type="text/css" />
+    <link href="ac_css/font-awesome-4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Dosis:200,300,400,500,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,700,600,300" rel="stylesheet" type="text/css">
+    <link href="admin_css/fileupload.css" rel="stylesheet" />
+
+
+    <link href="ac_css/buttons.css" rel="stylesheet" />
+
+    <script src="admin_js/jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="ac_js/bootstrap.min.js" type="text/javascript"></script>
+
+    <!-- AngularStore app -->
+    <script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+    <script src="ac_js/angular-route.1.3.15.min.js" type="text/javascript"></script>
+
+    <script src="ac_products/config.js"></script>
+    <script src="ac_products/products.js"></script>
+
+    <script src="ac_js/shoppingCart.js"></script>
+    <script src="ac_js/slick-angular.js" type="text/javascript"></script>
+    <script src="ac_js/adminApp.js" type="text/javascript"></script>
+
+    <script src="admin_js/json2.js"></script>
+    <script src="admin_js/html2json.js"></script>
+
+    <script src="ac_js/checkout.js" type="text/javascript"></script>
+    <script src="ac_js/jquery.form.js" type="text/javascript"></script>
+    <script src="ac_js/jquery.blockUI.min.js" type="text/javascript"></script>
+
+    <link href="admin_edit/ng-wig.css" rel="stylesheet">
+    <script src="admin_edit/ng-wig.js"></script>
+
+    <link id="link_index" href="ac_css/navbar_dkred_gradient.css" rel="stylesheet" type="text/css" />
+
+    <style>
+        * {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 12px;
+        }
+
+        #sidebar {
+            position: absolute;
+            left: 10px;
+            top: 80px;
+            bottom: 20px;
+            width: 260px;
+            border: solid 1px #CCCCCC;
+            overflow-y: scroll;
+        }
+
+        #content {
+            position: absolute;
+            top: 80px;
+            bottom: 20px;
+            left: 300px;
+            right: 20px;
+        }
+
+        .form-left-col {
+            width: 340px !important;
+            float: left !important;
+            margin-bottom: 15px;
+            margin-top: 5px;
+        }
+
+        .form-middle-col {
+            width: 340px !important;
+            float: left !important;
+            margin-bottom: 15px;
+            margin-top: 5px;
+        }
+
+        .form-right-col {
+            float: left !important;
+            width: 520px !important;
+            margin-bottom: 15px;
+            margin-top: 5px;
+        }
+
+        .zebra1 {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1.2em !important;
+        }
+
+        .zebra2 {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1.1em !important;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+            margin-top: 0;
+        }
+
+        #sidebar li:hover {
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#cfe7fa+0,6393c1+100;Grey+Blue+3D */
+            background: rgb(207,231,250); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(207,231,250,1) 0%, rgba(99,147,193,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(207,231,250,1) 0%,rgba(99,147,193,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(207,231,250,1) 0%,rgba(99,147,193,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cfe7fa', endColorstr='#6393c1',GradientType=0 ); /* IE6-9 */
+        }
+
+        #sidebar li a {
+            text-decoration: none;
+            display: block;
+            color: #000;
+            border-bottom: solid 1px #000;
+            padding: 6px 4px 8px 6px;
+            text-decoration: none !important;
+        }
+
+        #sidebar li {
+            background: rgb(255,255,255); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(255,255,255,1) 0%, rgba(246,246,246,1) 47%, rgba(237,237,237,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(246,246,246,1) 47%,rgba(237,237,237,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffffff', endColorstr='#ededed',GradientType=0 ); /* IE6-9 */
+        }
+
+        #sidebar li.active {
+            /*background-color: #CCCCCC !important;*/
+            color: #000 !important;
+            font-weight: 700;
+            text-decoration: none !important;
+            /* Permalink - use to edit and share this gradient: http://colorzilla.com/gradient-editor/#e1ffff+0,e1ffff+7,e1ffff+12,fdffff+12,e6f8fd+30,c8eefb+54,bee4f8+75,b1d8f5+100;Blue+Pipe+%232 */
+            background: rgb(225,255,255); /* Old browsers */
+            background: -moz-linear-gradient(top, rgba(225,255,255,1) 0%, rgba(225,255,255,1) 7%, rgba(225,255,255,1) 12%, rgba(253,255,255,1) 12%, rgba(230,248,253,1) 30%, rgba(200,238,251,1) 54%, rgba(190,228,248,1) 75%, rgba(177,216,245,1) 100%); /* FF3.6-15 */
+            background: -webkit-linear-gradient(top, rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* Chrome10-25,Safari5.1-6 */
+            background: linear-gradient(to bottom, rgba(225,255,255,1) 0%,rgba(225,255,255,1) 7%,rgba(225,255,255,1) 12%,rgba(253,255,255,1) 12%,rgba(230,248,253,1) 30%,rgba(200,238,251,1) 54%,rgba(190,228,248,1) 75%,rgba(177,216,245,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+            filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#e1ffff', endColorstr='#b1d8f5',GradientType=0 ); /* IE6-9 */
+        }
+
+        input[type=text], textarea {
+            -webkit-transition: all 0.30s ease-in-out;
+            -moz-transition: all 0.30s ease-in-out;
+            -ms-transition: all 0.30s ease-in-out;
+            -o-transition: all 0.30s ease-in-out;
+            outline: none;
+            padding: 3px 0 3px 3px;
+            margin: 5px 1px 3px 0;
+            border: 1px solid #DDDDDD;
+        }
+
+            input[type=text]:focus, textarea:focus {
+                box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+                padding: 3px 0 3px 3px;
+                margin: 5px 1px 3px 0;
+                border: 1px solid rgba(81, 203, 238, 1);
+            }
+
+        input[type="text"]:disabled {
+            border: 0 none #fff !important;
+            background-color: #fff !important;
+            color: #a90329 !important;
+        }
+
+        input[type="checkbox"] {
+            vertical-align: middle;
+            width: 16px;
+            height: 16px;
+            margin-top: 0;
+            border: 1px solid rgba(0,0,0,.4);
+            border-radius: 999px;
+            background-color: rgba(0, 0, 0, 0.1);
+            -webkit-transition-duration: .4s;
+            -webkit-transition-property: background-color, box-shadow;
+            box-shadow: inset 0 0 0 0 rgba(0,0,0,0.4);
+        }
+
+        input[name='product.storeid'], input[name='product.productid'] {
+            background-color: white !important;
+        }
+        /*input[textarea-id='productname'] {
+            width: 300px !important;
+        }*/
+        /*input[type="date"] {
+            background-color: rgba(226,226,226,0.6) !important;
+        }*/
+
+        label {
+            display: block;
+        }
+
+        button {
+            padding: 6px;
+        }
+
+        .btn {
+            width: 200px;
+            text-align: left;
+        }
+
+            .btn .caret {
+                float: right;
+            }
+
+        .drop-down {
+            position: relative;
+            border: 1px solid #ddd;
+            padding: 5px;
+            border-radius: 3px;
+            box-shadow: 2px #555;
+            width: 90px;
+        }
+
+            .drop-down ul {
+                margin: 0;
+                padding: 0;
+            }
+
+            .drop-down li {
+                list-style: none;
+            }
+
+            .drop-down a {
+                display: block;
+                padding: 2px 5px;
+            }
+
+                .drop-down li:hover, .drop-down a:hover {
+                    background: #0088CC;
+                    color: #fff;
+                    text-decoration: none;
+                }
+
+        .overlay {
+            background: transparent;
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .rounded-img, .ui-li-icon {
+            float: left;
+            top: 0;
+            padding: 0 0 0 0;
+            margin-left: 0;
+            width: 50px !important;
+            height: 36px !important;
+            display: inline-block;
+            /*border: none 0 transparent !important;*/
+            border: solid 1px #000;
+            overflow: hidden;
+            background-color: #fff !important;
+            -webkit-border-radius: 10px;
+            -moz-border-radius: 10px;
+            border-radius: 10px;
+            -webkit-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+            -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, .4);
+        }
+
+        .elipsis {
+            width: 100%;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            -o-text-overflow: ellipsis;
+        }
+
+        .center-wrapper {
+            text-align: center;
+        }
+
+            .center-wrapper * {
+                margin: 0 auto 0 auto;
+            }
+
+        /* scrollbar*/
+        .scrollbar {
+            /*width:150px;
+        height:300px;
+        background-color:lightgray;
+        margin-top:40px;
+        margin-left:40px;
+        overflow-y:scroll;
+        float:left;*/
+        }
+
+        #sidebar::-webkit-scrollbar {
+            width: 16px;
+            background-color: #cccccc;
+        }
+
+        #sidebar::-webkit-scrollbar-thumb {
+            background-color: #B03C3F;
+            border-radius: 10px;
+        }
+
+            #sidebar::-webkit-scrollbar-thumb:hover {
+                background-color: #BF4649;
+                border: 1px solid #333333;
+            }
+
+            #sidebar::-webkit-scrollbar-thumb:active {
+                background-color: #A6393D;
+                border: 1px solid #333333;
+            }
+
+        #sidebar::-webkit-scrollbar-track {
+            border: 1px gray solid;
+            border-radius: 10px;
+            -webkit-box-shadow: 0 0 6px gray inset;
+        }
+        /* end scrollbar*/
+
+        .highlight {
+            border: 2px solid #F7A;
+        }
+
+        .expecteddate, input#expecteddate {
+            max-width: 210px !important;
+            width: 210px !important;
+            white-space: nowrap !important;
+        }
+
+        .blktext {
+            color: #000 !important;
+        }
+
+        .redtext {
+            color: #a90329 !important;
+        }
+
+        .navbar .nav > li > a, .navbar .nav > li > a:first-letter,
+        .navbar .nav > li.current-menu-item > a,
+        .navbar .nav > li.current-menu-ancestor > a {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 1.4em !important;
+        }
+
+        .bcolor_purple {
+            border-bottom: 6px solid #b753d8 !important;
+        }
+
+        .bcolor_green {
+            border-bottom: 6px solid #6bc356 !important;
+        }
+
+        .bcolor_mustard {
+            border-bottom: 6px solid #fab903 !important;
+        }
+
+        .bcolor_red {
+            border-bottom: 6px solid #e94739 !important;
+        }
+
+        .bcolor_blue {
+            border-bottom: 6px solid #427fed !important;
+        }
+
+        mylabel {
+            display: block;
+            float: left;
+            width: 70px;
+            margin: 8px 0 0 0 !important;
+            font-weight: bold !important;
+        }
+
+        .selected-class-name {
+            background-color: #eb5c12 !important;
+        }
+
+        .placeholder {
+            color: #aaa;
+        }
+
+    .editor1 .nw-editor {
+      height: 300px !important;
+      max-height: 60px !important;
+    }
+    .editor2 .nw-editor {
+      height: 520px;
+      max-height: 80px !important;
+    }
+
+    .nw-editor__res.ng-invalid.ng-touched,
+    .nw-editor__src.ng-invalid{
+      border: 2px solid #FF0000;
+    }
+
+    </style>
+
+    <script>
+        var _carousel_animation = "hvr-pulse";
+
+        var _navbar_theme = "navbar_dkred_gradient";
+
+        $(document).ready(function () {
+
+
+        });
+
+        window.location.hash = '#/'; //All hash paths need to start with a /, it happens automaticaly with ngResource and the like...
+
+        //$('[placeholder]').parents('form').submit(function () {
+        //    $(this).find('[placeholder]').each(function () {
+        //        var input = $(this);
+        //        if (input.val() == input.attr('placeholder')) {
+        //            input.val('');
+        //        }
+        //    })
+        //});
+
+        //the module we are demonstrating:
+        (function () {
+
+            angular.module('autoActive', [])
+                .directive('autoActive', ['$location', function ($location) {
+                    return {
+                        restrict: 'A',
+                        scope: false,
+                        link: function (scope, element) {
+                            function setActive() {
+                                var path = $location.path();
+                                if (path) {
+                                    angular.forEach(element.find('li'), function (li) {
+                                        var anchor = li.querySelector('a');
+                                        if (anchor.href.match('#' + path + '(?=\\?|$)')) {
+                                            angular.element(li).addClass('active');
+                                        } else {
+                                            angular.element(li).removeClass('active');
+                                        }
+                                    });
+                                }
+                            }
+                            setActive();
+                            scope.$on('$locationChangeSuccess', setActive);
+                        }
+                    }
+                }]);
+        }());
+
+        //$(function () {
+
+        //    $('#fileToUpload').change(function (event) {
+        //        var tmppath = URL.createObjectURL(event.target.files[0]);
+        //        //$("img").fadeIn("fast").attr('src', tmppath);
+        //        alert(tmppath);
+        //    });
+        //});
+    </script>
+</head>
+<body id="idForJS" ng-controller="storeController">
+    <div id="zheader">
+        <!--<nav role="navigation" class="navbar navbar-inverse">-->
+        <!-- Fixed navbar -->
+        <nav class="navbar yamm navbar-custom navbar-fixed-top" ng-controller="MyMenu" ng-init="active=true">
+            <!-- BIG CONFLICT WITH CONTAINER in pinboard.css to be fixed later!!! -->
+            <div class="zcontainer">
+                <div class="navbar-header" style="padding-right: 20px !important;">
+                    <!-- Brand and toggle get grouped for better mobile display -->
+                    <!--<div class="navbar-header">-->
+                    <!--<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">-->
+                    <button ng-init="navCollapsed = true" ng-click="navCollapsed = !navCollapsed" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <!--<a href="#" class="navbar-brand">Brand</a>-->
+                    <a class="your-brand" href="{{NAVBAR_LOGO_LINK}}" target="_blank">
+                        <img src="{{NAVBAR_LOGO_IMAGE}}" alt="logo" style="padding-top: 6px !important;">
+                    </a>
+                </div>
+                <div id="navbarCollapse" class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a ng-href="#"><span class="fa fa-home"></span>&nbsp;Home<span></span></a>
+                        <li class="dropdown">
+                            <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-database"></span>&nbsp;Data Sources<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-model="dataModel" ng-repeat="option in dataOptions"
+                                    ng-class="{ 'selected-class-name': $index == selectedDataIndex }">
+                                    <a href="#" ng-click="loadData($index)"><img src="{{option.img}}" />&nbsp;{{option.name}}</a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="dropdown" ng-class="{open1: open1}">
+                            <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-cart-plus"></span>&nbsp;Shopping Carts<span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a ng-click="open1=!open1" ng-href="http://www.codeproject.com/Articles/881354/Angular-Shopping-Cart-That-is-Responsive-Mobile" target="_blank"><img src="admin_img/codeproject.png" description="''">&nbsp;Shopping Cart Article & Source Code<span></span></a></li>
+                                <li><a ng-click="open1=!open1" ng-href="http://www.codeproject.com/Articles/895739/Super-Slick-Carousel-Using-AngularJS-Directive-Dyn" target="_blank"><img src="admin_img/slider.png">&nbsp;Angular Cart Slider Article<span></span></a></li>
+                                <li><a ng-click="open1=!open1" ng-href="http://www.software-rus.com/storefront.html#/store" target="_blank"><img src="admin_img/cart.png">&nbsp;Sample Shopping Cart with Slider<span></span></a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-square"></span>&nbsp;NavBars<span class="caret"></span></a>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-click="changeNavBar('navbar_gray_gradient')"><a href="#"><img src="ac_img/nb_gray.png" />&nbsp;Gray Gradient</a></li>
+                                <li ng-click="changeNavBar('navbar_dkred_gradient')"><a href="#"><img src="ac_img/nb_red.png" />&nbsp;Dk Red Gradient</a></li>
+                                <li ng-click="changeNavBar('navbar_blue_gradient')"><a href="#"><img src="ac_img/nb_blue.png" />&nbsp;Blue Gradient</a></li>
+                                <li ng-click="changeNavBar('navbar_brown_gradient')"><a href="#"><img src="ac_img/nb_brown.png" />&nbsp;Brown Gradient</a></li>
+                                <li ng-click="changeNavBar('navbar_black_gradient')"><a href="#"><img src="ac_img/nb_black.png" />&nbsp;Black Gradient</a></li>
+                            </ul>
+                        </li>
+                        <!-- Bill SerGio - for Boostrap 4 & higher use code below:
+                        <li class="dropdown clearfix" ng-class="{open: open}">
+                        <a href="#" ng-click="open=!open"><div class="fa fa-desktop">Video<span class="caret"></span></div></a>
+                        <ul role="menu" class="dropdown-menu" ng-click="$event.stopPropagation()">-->
+                        <li class="dropdown">
+                            <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-youtube-play"></span>&nbsp;Video<span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a ng-click="open=!open" ng-href="https://www.youtube.com/watch?v=YyZNIarRYSc" target="_blank"><img favicon url="'https://www.youtube.com'" description="''">&nbsp;<img src="admin_img/1_youtube.png"></a></li>
+                                <li><a ng-href="http://www.youku.com/" target="_blank"><img favicon url="'http://www.youku.com'" description="'Youku'">&nbsp;<img src="admin_img/11_yklogo.png"></a></li>
+                                <li><a ng-href="http://www.vimeo.com/" target="_blank"><img favicon url="'http://www.vimeo.com'" description="'Vimeo'">&nbsp;<img src="admin_img/3_vimeo.png"></a></li>
+                                <li><a ng-href="http://www.dailymotion.com/" target="_blank"><img favicon url="'http://www.dailymotion.com'" description="'DailyMotion'">&nbsp;<img src="admin_img/2_dailymotion.png"></a></li>
+                                <li><a ng-href="http://www.5min.com/" target="_blank"><img favicon url="'http://www.5min.com'" description="'5min'">&nbsp;<img src="admin_img/14_5min.png"></a></li>
+                                <li><a ng-href="http://www.cc.com/" target="_blank"><img favicon url="'http://www.cc.com'" description="'5min'">&nbsp;<img src="admin_img/15_cc.png"></a></li>
+                                <li><a ng-href="http://www.metacafe.com/" target="_blank"><img favicon url="'http://www.metacafe.com'" description="'Metacafe'">&nbsp;<img src="admin_img/4_metacafe.png"></a></li>
+                                <li><a ng-href="http://www.liveleak.com/" target="_blank"><img favicon url="'http://www.liveleak.com'" description="'Liveleak'">&nbsp;<img src="admin_img/5_liveleak.png"></a></li>
+                                <li><a ng-href="http://www.ebaumsworld.com/" target="_blank"><img favicon url="'http://www.ebaumsworld.com'" description="'Ebaumsworld'">&nbsp;<img src="admin_img/7_ebaumsworld.png"></a></li>
+                                <li><a ng-href="http://http://blip.tv/" target="_blank"><img favicon url="'http://blip.tv/'" description="'bliptv'">&nbsp;<img src="admin_img/16_bliptv.png"></a></li>
+                                <li><a ng-href="https://www.youtube.com/user/break" target="_blank"><img favicon url="'https://www.youtube.com/user/break'" description="'Break'">&nbsp;<img src="admin_img/6_break.png"></a></li>
+                                <li><a ng-href="http://www.funnyordie.com/" target="_blank"><img favicon url="'http://www.funnyordie.com/'" description="'fod'">&nbsp;<img src="admin_img/17_fod.png"></a></li>
+                                <li><a ng-href="http://www.stupidvideos.com/" target="_blank"><img favicon url="'http://www.stupidvideos.com/'" description="'fod'">&nbsp;<img src="admin_img/18_stupidvideos.png"></a></li>
+                                <!--<li role="presentation" class="dropdown-header">-- sites NOT included below --</li>
+                                <li><a ng-href="http://www.collegehumor.com/" target="_blank"><img favicon url="'http://www.collegehumor.com'" description="'CollegeHumor'">&nbsp;<img src="admin_img/8_collegehumor.png"></a></li>
+                                <li><a ng-href="http://www.blinkx.com/" target="_blank"><img favicon url="'http://www.blinkx.com'" description="'Blinkx'">&nbsp;<img src="admin_img/9_blinkx.png"></a></li>
+                                <li><a ng-href="http://www.megavideo.to/" target="_blank"><img favicon url="'http://www.megavideo.com'" description="'MegaVideo'">&nbsp;<img src="admin_img/10_megavideo.png"></a></li>
+                                <li><a ng-href="http://www.bitlanders.com/" target="_blank"><img favicon url="'http://www.bitlanders.com'" description="'Bitlanders'">&nbsp;<img src="admin_img/12_bitlanders.png"></a></li>
+                                <li><a ng-href="https://vine.co/" target="_blank"><img favicon url="'https://vine.co/'" description="'Vine'">&nbsp;<img src="admin_img/13_vine.png"></a></li>-->
+                            </ul>
+                        </li>
+                        <!--<li class="dropdown">
+                        <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-comment-o"></span>&nbsp;Cool Stuff<span class="caret"></span></a>
+                        <ul role="menu" class="dropdown-menu" ng-click="$event.stopPropagation()">-->
+                        <li class="dropdown">
+                            <a ng-click="navCollapsed = !navCollapsed" href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><span class="fa fa-thumbs-up"></span>&nbsp;Cool Stuff<span class="caret"></span></a>
+                            <ul role="menu" class="dropdown-menu">
+                                <li><a ng-href="http://www.pat2pdf.org" target="_blank" /><img favicon url="'http://www.uspto.gov/'" description="'Free Patent Copies'">&nbsp;FREE Patent Copies</a></li>
+                                <li><a ng-href="http://www.software-rus.com/powerpinboard.html" target="_blank"><span class="fa fa-bookmark"></span>&nbsp;FREE Source Code </a></li>
+                                <li><a href="http://www.SerGioApps.com/" target="_blank"><span class="fa fa-usd"></span>&nbsp;Sell Your Apps on TV<span></span></a></li>
+                                <li><a ng-href="http://www.stationbreak.net/" target="_blank"><img favicon url="'http://www.software-rus.com/powerpinboard.html'" description="'Creat A TV Spot'">&nbsp;Creat A TV Spot </a></li>
+                                <li><a ng-href="http://www.stationbreak.net/SBDemos/Reports/rSalesByMonthTotals.pdf" target="_blank" /><img favicon url="'http://www.sergioapps.com/'" description="'TV Sales Results'">&nbsp;TV Sales Results</a></li>
+                                <li><a ng-href="http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects" target="_blank" /><img favicon url="'http://line25.com/articles/using-css-text-shadow-to-create-cool-text-effects'" description="'Text effects'">&nbsp;Text Effects</a></li>
+                                <li><a ng-href="http://www.colorzilla.com/gradient-editor/" target="_blank" /><img favicon url="'http://www.colorzilla.com/gradient-editor/'" description="'CSS Colors'">&nbsp;CSS Colors</a></li>
+                                <!--<li><a ng-href="../tools/symbols.html" target="_blank" />Symbols</a></li>-->
+                                <li><a ng-href="http://www.census.gov/2010census/popmap/" target="_blank" /><img favicon url="'http://www.census.gov/2010census/popmap/'" description="'Pop Map'">&nbsp;Pop Map</a></li>
+                                <li><a ng-href="http://www.cooltext.com/" target="_blank" /><img favicon url="'http://www.cooltext.com/'" description="'Cool Text'">&nbsp;Cool Text</a></li>
+                                <li><a ng-href="http://www.cssbuttongenerator.com/" target="_blank" /><img favicon url="'http://www.cssbuttongenerator.com/'" description="'Button Maker'">&nbsp;Button Maker</a></li>
+                                <li><a ng-href="http://ezgif.com/maker" target="_blank" /><img favicon url="'http://ezgif.com/maker'" description="';GIF Maker'">&nbsp;GIF Maker</a></li>
+                                <li><a ng-href="http://www.plugolabs.com/twitter-bootstrap-button-generator/" target="_blank" /><img favicon url="'http://www.plugolabs.com/twitter-bootstrap-button-generator/'" description="'Bootstrap Buttons'">&nbsp;Bootstrap Buttons</a></li>
+                                <li><a ng-href="http://www.regexr.com/" target="_blank" /><img favicon url="'http://www.regexr.com/'" description="'Regex'">&nbsp;Regex</a></li>
+                                <li><a ng-href="http://www.qrstuff.com/" target="_blank" /><img favicon url="'http://www.qrstuff.com/'" description="'QR Stuff'">&nbsp;QR Stuff</a></li>
+                                <li><a ng-href="http://www.online-image-editor.com/" target="_blank" /><img favicon url="'http://www.online-image-editor.com/'" description="'Image Editor'">&nbsp;Image Editor</a></li>
+                                <li><a ng-href="http://ezgif.com/maker" target="_blank" /><img favicon url="'http://ezgif.com/maker'" description="'GIF Maker'">&nbsp;GIF Maker</a></li>
+                                <li><a ng-href="http://video.online-convert.com/" target="_blank" /><img favicon url="'http://video.online-convert.com/'" description="'Video Converter'">&nbsp;Video Converter</a></li>
+                                <li><a ng-href="http://www.facegarage.com/photoEditors/youtubeToGIF" target="_blank" /><img favicon url="'http://www.facegarage.com/photoEditors/youtubeToGIF'" description="'YouTube2Gif Converter'">&nbsp;YouTube2Gif Converter</a></li>
+                            </ul>
+                        </li>
+                        <li><a ng-href="http://www.stationbreak.net/About.aspx" target="_blank"><span class="fa fa-bullhorn"></span>&nbsp;About</span></a>
+                    </ul>
+                    <!--<form role="search" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            <input type="text" placeholder="Search" class="form-control">
+                        </div>
+                    </form>-->
+                    <ul class="nav navbar-nav navbar-right" style="padding-right:22px !important;">
+                        <li><a ng-href="https://www.youtube.com/watch?v=HppJHKwCGCo" target="_blank"><span class="fa fa-video-camera"></span>&nbsp;Free Movies<span></span></a>
+                    </ul>
+                </div>
+        </nav>
+    </div>
+
+    <div id="sidebar" auto-active class="scrollbar">
+
+        <ul id="nav" data-role="listview" data-inset="true" class="ui-listview general">
+            <li id="sidebarlist" data-icon="false" data-role="listview" style="width:100%;display:block;" ng-repeat="product in products | filter:myFilter | orderBy:'sortorder'">
+                <a ng-href="#/product/{{product.sku}}" class="rsslistfetch-link">
+                    <img class="rounded-img" src="ac_products/{{ product.imagename }}">
+                    <div class="ellipsis">&nbsp;&nbsp;&nbsp;<span class="zebra1">{{ product.sku | limitTo:16 }}</span></div>
+                    <div class="ellipsis">&nbsp;&nbsp;&nbsp;<span class="zebra2">{{ product.productname | htmlToPlaintext | limitTo:20 }}</span></div>
+
+                </a>
+            </li>
+            <div style="height:1200px;"></div>
+        </ul>
+    </div>
+
+    <div id="content">
+        <div>
+            <span ng-class="carouselFilterClass" onMouseOver="this.style.cursor='pointer'" filterTextClass ng-click="carouselFilter()">carousel</span> |
+            <span ng-class="showvideoFilterClass" onMouseOver="this.style.cursor='pointer'" ng-click="showvideoFilter()">video</span>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <span onMouseOver="this.style.cursor='pointer'" ng-click="setFilter(null)">all</span>
+            <span ng-repeat="product in products | unique: 'categoryname'" style="white-space:nowrap !important;">
+                | <span onMouseOver="this.style.cursor='pointer'" ng-click="setFilter(product.categoryname)">{{product.categoryname}}</span>
+            </span>
+        </div>
+
+        <div style="border-top: 1px solid #8f0222;margin:1px 0 2px 0 !important;"></div>
+        <ng-view></ng-view>
+    </div>
+
+</body>
+</html>

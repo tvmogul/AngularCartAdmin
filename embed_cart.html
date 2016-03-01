@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Bootstrap 3 Fluid Layout Example</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <style>
+        body {
+            overflow:hidden;
+        }
+        #ziframe::-webkit-scrollbar { 
+            display: none; 
+        }
+    </style>
+
+    <script>
+
+        $(document).ready(function () {
+            $('#fileTreeIframe').load(function () {
+                var $ifbody = $(this).contents().find('body');
+                $ifbody.css('height', 'auto');
+                $(this).height($ifbody.height());
+            });
+        });
+
+    </script>
+
+</head>
+<body>
+    <div id="ziframe">
+        <iframe id="fileTreeIframe" src="http://www.sergioapps.com/storefront.html#/store" style="width:100%;height:1000px"></iframe>
+    </div>
+</body>
+</html>                                		
