@@ -1,0 +1,241 @@
+<!--<div style="position:absolute;top:0;left:0;border:2px solid red;">-->
+<table cellpadding="0" cellspacing="0" style="width:100%;">
+    <tr style="padding: 0 0 0 0;">
+        <td style="vertical-align: top; text-align: left;width: 250px !important;max-width: 250px !important;">
+            <div class="store_img_video">
+                <div ng-hide="product.showvideo > 0" ng-show="product.showvideo < 1" style="width: 300px;">
+                    <!--USE THIS TO POPUP MODAL DIALOG: <a href="#" ng-click="launchSimpleModal(product)"> -->
+                    <img src="ac_products/{{product.imagename}}"
+                         onerror="this.src = 'ac_products/generic.jpg'"
+                         style="display: block;width:auto !important; height:150px !important;" />
+                </div>
+                <div ng-show="product.showvideo > 0">
+                    <div embed-video tube="product.tube" code="product.videoid"></div>
+                </div>
+            </div>
+        </td>
+        <td style="vertical-align: top; text-align: left;width: 250px !important;max-width: 250px !important;">
+            <table style="margin: 0 0 0 0;padding: 0 0 0 0;">
+                <tr>
+                    <td style="text-align:left;vertical-align:top !important;">
+                        <table>
+                            <tr>
+                                <td><button ng-click="setImageDirectory();" id="btnSetImageDirectory" class="btn btn-x-blue" style="width:60px !important;height: 18px;margin:6px 0 0 0;">Img Dir</button></td>
+                                <td>&nbsp;<input type="text" id="txtImageDir" name="txtImageDir" placeholder="enter sub directory in ac_products" style="width:200px !important;margin:6px 0 0 0;" /></td>
+                            </tr>
+                        </table>
+                        <div style="height: 1px;"></div>
+                        <div ng-controller="FileUploadCtrl" style="vertical-align: top; text-align: left;width: 280px !important;max-width: 280px !important;">
+                            <table id="buttontable" style="width: 280px !important;">
+                                <tr style="text-align:left !important;">
+                                    <td style="text-align:left !important;vertical-align:top;">
+                                        <button onclick="document.getElementById('fileToUpload').click(); return false;" class="btn btn-x-blue" style="max-width:60px !important;width:60px !important;">Image</button>
+                                        <input type="file" ng-model-instant id="fileToUpload"
+                                               onchange="angular.element(this).scope().setFiles(this)"
+                                               style="width:50px;display: none;" class="fileinput-button input btn btn-x-blue" />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align:left !important;vertical-align:text-top;white-space:nowrap !important;margin: 0 0 0 0;">
+                                        <div ng-show="files.length > 0">
+                                            <button ng-click="uploadFile()" class="btn btn-x-blue" style="width:60px !important;">Upload</button>
+                                        </div>
+                                    </td>
+                                    <td style="text-align:left !important;vertical-align:text-top;white-space:nowrap !important;margin: 0 0 0 0;">
+                                        <div ng-show="files.length > 0">
+                                            <div ng-show="progressVisible">
+                                                <div class="percent">{{progress}}%</div>
+                                                <div class="progress-bar">
+                                                    <div class="uploaded" ng-style="{'width': progress+'%'}"></div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align:left !important;vertical-align:top;">
+                                        <div ng-show="files.length > 0">
+                                            <div ng-repeat="file in files.slice(0)">
+                                                <div style="white-space:nowrap !important;">
+                                                    <span>{{file.webkitRelativePath || file.name}}</span>
+                                                    (<span ng-switch="file.size > 1024*1024">
+                                                        <span ng-switch-when="true">{{file.size / 1024 / 1024 | number:2}} MB</span>
+                                                        <span ng-switch-default>{{file.size / 1024 | number:2}} kB</span>
+                                                    </span>)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td style="text-align:left !important;vertical-align:top;">
+                                        <div id="dropbox" class="dropbox" ng-class="dropClass" style="display: none"><span>{{dropText}}</span></div>
+                                    </td>
+                                    <td></td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div style="height: 10px;"></div>
+                        <table>
+                            <tr>
+                                <td style="padding-right:8px;vertical-align:top;">video<br /><div style="height: 8px !important;"></div><input type="checkbox" id="showvideo" ng-model="product.showvideo" /></td>
+                                <td style="padding-right:2px;vertical-align:middle;width: 120px !important;">videoid<br /><input type="text" id="videoid" name="videoid" ng-model="product.videoid" value="{{ product.videoid }}" style="width: 120px !important;" /></td>
+                                <td style="padding-right:2px;vertical-align:middle;">
+                                    tubes<br />
+                                    <select name="repeatSelect" id="repeatSelect" ng-model="product.tube" class="drop-down">
+                                        <option ng-repeat="option in data.availableOptions" value="{{option.id}}">{{option.name}}</option>
+                                    </select>
+                                </td>
+                            </tr>
+                        </table>
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td style="vertical-align: top; text-align: left;width:440px;">
+            <div><mylabel>Store ID</mylabel><input id="storeid" name="storeid" type="text" ng-model="product.storeid" value="{{ product.storeid" }}" disabled style="color:red;width: 290px !important;" /></div>
+            <div><mylabel>Product ID</mylabel><input id="productid" name="productid" type="text" ng-model="product.productid" value="{{ product.productid }}" disabled style="color:red;width: 290px !important;margin:4px 0 8px 0 !important;" /></div>
+
+            <label style="margin-bottom:-2px !important;">
+                Discontinued <input type="checkbox" ng-model="product.discontinued" />
+                &nbsp;&nbsp;&nbsp;Faux <input type="checkbox" ng-model="product.faux" />
+            </label>
+            <div style="height: 2px;"></div>
+            <table>
+                <tr>
+                    <td>
+                        <label style="margin-bottom:-4px !important;">
+                            Image Name&nbsp;&nbsp;&nbsp;&nbsp;
+                        </label>
+                    </td>
+                    <td>
+                        <input type="text" id="txtImageName" name="imagename" ng-model="product.imagename" value="{{ product.imagename }}" style="width: 200px !important;" />
+                    </td>
+                    <td>&nbsp;&nbsp;  
+                        <a ng-show="product.showvideo && product.tube == 'youtube'" target="_self" href="https://img.youtube.com/vi/{{product.videoid}}/hqdefault.jpg" download="">YouTube Image</a>
+                    </td>
+                </tr>
+            </table>
+            <div style="height: 4px;"></div>
+            <!--<div style="color:#d51414;font-weight:bold;">* To insert page breaks in (html) fields YOU MUST hold down the shift key and hit enter</div>-->
+            <!--<div>xxxxxxxxxxxxxxxxxx"col-md-{{3 | randomize}} box"</div>-->
+            <!--<div ng-init="initRand()">
+                <div embed-video tube="myArrayOfObjects[0].tube" code="myArrayOfObjects[getRandomSpan()].videoid"></div>
+            </div>-->
+        </td>
+    </tr>
+</table>
+<!--</div>-->
+
+<div style="width:100%;margin: 2px 0 2px 0 !important;height:1px !important;background-color: #808080;"></div>
+
+<div class="form-left-col">
+    <div><mylabel>SKU</mylabel><input type="text" id="sku" name="sku" ng-model="product.sku" value="{{ product.sku }}" style="width: 230px !important;" /></div>
+
+    <div style="height: 6px;"></div>
+    <div><mylabel>Category</mylabel><input type="text" id="categoryname" name="categoryname" ng-model="product.categoryname" value="{{ product.categoryname }}" style="width: 230px !important;" /></div>
+
+    <div style="height: 6px;"></div>
+    <div><mylabel>Unit Price</mylabel><input type="text" id="unitprice" name="unitprice" ng-model="product.unitprice" value="{{ product.unitprice }}" style="width: 230px !important;" /></div>
+
+    <div style="height: 6px;"></div>
+    <div><mylabel>Sale Price</mylabel><input type="text" id="saleprice" name="saleprice" ng-model="product.saleprice" value="{{ product.saleprice }}" style="width: 230px !important;" /></div>
+
+    <div style="display: block;padding:10px 0 40px 0 !important;">
+        <label style="margin-bottom:-2px !important;">Product Name <span style="color:#d51414;">(html)</span>&nbsp;&nbsp;</label>
+        <textarea id="productname" name="productname" ng-wig="product.productname" class="editor1" source-mode-allowed style="max-width: 300px !important; height: 60px !important;"></textarea>
+    </div>
+
+    <div style="display: block;padding:0 0 20px 0 !important;">
+        <label style="margin-bottom:-2px !important;">
+            Carousel Caption <span style="color:#d51414;padding-right:20px;">(html)</span>Show in Carousel: <input type="checkbox" ng-model="product.carousel" />
+        </label>
+        <textarea id="carousel_caption" name="carousel_caption" ng-wig="product.carousel_caption" class="editor1" source-mode-allowed style="max-width: 300px !important; height: 60px !important;"></textarea>
+    </div>
+
+    <div style="height: 14px;"></div>
+
+    <br />
+    <button class="btn btn-x-blue" style="width:50px;" ng-click="update(product)">Save</button>
+    <button class="btn btn-x-blue" style="width:50px;" ng:click="new()">New</button>
+    <button class="btn btn-x-blue" style="width:60px;" ng:click="delete()">Delete</button>
+
+</div>
+
+<div class="form-middle-col">
+
+    <table>
+        <tr>
+            <td><mylabel>Sort Order</mylabel></td>
+            <td style="padding-right:16px;">
+                <input type="number" id="sortorder" name="sortorder" ng-model="product.sortorder" min="0" max="100" value="{{ product.sortorder }}" style="width: 70px !important;" />
+            </td>
+            <td style="font-weight:bold;padding-right:4px;vertical-align:top;">Units<br />in Stock</td>
+            <td>
+                <input type="number" id="unitsinstock" name="unitsinstock" ng-model="product.unitsinstock" value="{{ product.unitsinstock }}" style="width: 70px !important;" />
+            </td>
+        </tr>
+        <tr style="height:4px !important;"></tr>
+        <tr>
+            <td><mylabel>On Order</mylabel></td>
+            <td style="padding-right:16px;">
+                <input type="number" id="unitsonorder" name="unitsonorder" ng-model="product.unitsonorder" value="{{ product.unitsonorder }}" style="width: 70px !important;" />
+            </td>
+            <td style="font-weight:bold;padding-right:4px;vertical-align:top;">Reorder<br />level</td>
+            <td>
+                <input type="number" id="reorderlevel" name="reorderlevel" ng-model="product.reorderlevel" value="{{ product.reorderlevel }}" style="width: 70px !important;" />
+            </td>
+        </tr>
+        <tr style="height:4px !important;">
+        <tr>
+    </table>
+    <div style="height: 4px;"></div>
+    <div class="expecteddate">
+        <mylabel>Expected</mylabel>
+        <input type="date" id="expecteddate" name="expecteddate" ng-model="product.expecteddate" placeholder="MM-dd-yyyy" />
+        <!--<div role="alert">
+            <span class="error" ng-show="input.$error.required">
+                Required!
+            </span>
+            <span class="error" ng-show="input.$error.date">
+                Not a valid date!
+            </span>
+        </div>-->
+    </div>
+
+    <div style="height: 10px;"></div>
+    <div><mylabel>URL Link</mylabel><input type="text" id="link" name="link" ng-model="product.link" value="{{ product.link }}" style="width: 210px !important;" /></div>
+
+    <div style="height: 10px;"></div>
+    <div><mylabel>Link Text</mylabel><input type="text" id="linktext" name="linktext" ng-model="product.linktext" value="{{ product.linktext }}" style="width: 210px !important;" /></div>
+
+    <div style="height: 10px;"></div>
+    <div><mylabel>Image URL</mylabel><input type="text" id="imageurl" name="imageurl" ng-model="product.imageurl" value="{{ product.imageurl }}" style="width: 210px !important;" /></div>
+
+    <div style="height: 10px;"></div>
+    <label>Notes&nbsp;&nbsp;</label>
+    <textarea id="notes" name="notes" ng-model="product.notes" data-type="text" height="40" style="width:280px;height:40px;word-wrap: break-word;word-break: break-word;">{{ product.notes }}</textarea>
+    <br />
+
+</div>
+
+<div id="form-right-col" class="form-right-col">
+
+    <label style="margin-bottom:-2px !important;">Header <span style="color:#d51414;">(html)</span>&nbsp;&nbsp;</label>
+    <textarea id="header" name="header" ng-wig="product.header" class="editor1" source-mode-allowed style="width:520px;height:80px;"></textarea>
+
+    <div style="margin:12px 0 0 0 ;height: 10px;"></div>
+    <label style="margin-bottom:-2px !important;">Short Description <span style="color:#d51414;">(html)</span>&nbsp;&nbsp;</label>
+    <textarea id="shortdesc" name="shortdesc" ng-wig="product.shortdesc" class="editor1" source-mode-allowed style="width:520px;height:80px;"></textarea>
+
+    <div style="margin:12px 0 0 0 ;height: 10px;"></div>
+    <label style="margin-bottom:-2px !important;">Description <span style="color:#d51414;">(html)</span>&nbsp;&nbsp;</label>
+    <textarea id="description" name="description" ng-wig="product.description" class="editor1" source-mode-allowed style="width:520px;height:80px;"></textarea>
+
+    <!--<div ng-show="product.showvideo > 0">
+        <div embed-video tube="product.tube" code="product.videoid"></div>
+    </div>-->
+
+
+</div>
+
+
+
+
+
