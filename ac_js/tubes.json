@@ -1,0 +1,17 @@
+{"tubes":
+  [
+    { "n": "YouTube", "v": "youtube" },
+    { "n": "YouKu", "v": "youku" },
+    { "n": "Vimeo", "v": "vimeo" },
+    { "n": "DailyMotion", "v": "dailymotion" },
+    { "n": "5min", "v": "5min" },
+    { "n": "mtvnservices", "v": "cc" },
+    { "n": "MetaCafe", "v": "metacafe" },
+    { "n": "liveleak", "v": "liveleak" },
+    { "n": "ebaumsworld", "v": "ebaumsworld" },
+    { "n": "bliptv", "v": "bliptv" },
+    { "n": "funnyordie", "v": "funnyordie" },
+    { "n": "stupidvideos", "v": "stupidvideos" }
+  ]
+}
+
