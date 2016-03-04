@@ -1,0 +1,108 @@
+﻿
+    table {
+        border-collapse: collapse;
+    }
+
+    .percent {
+        position: absolute;
+        width: 150px;
+        height: 14px;
+        z-index: 1;
+        text-align: center;
+        font-size: 0.8em;
+        color: white;
+    }
+
+    .progress-bar {
+        width: 150px;
+        height: 14px;
+        border-radius: 10px;
+        border: 1px solid #CCC;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#6666cc), to(#4b4b95));
+        border-image: initial;
+    }
+
+    .uploaded, #buttontable .uploaded {
+        padding: 0;
+        height: 14px;
+        border-radius: 10px;
+        background-image: -webkit-gradient(linear, left top, left bottom, from(#66cc00), to(#4b9500));
+        border-image: initial;
+    }
+
+    .dropbox, #buttontable .dropbox {
+        width: 8em;
+        height: 1.4em;
+        border: 2px solid #DDD;
+        border-radius: 8px;
+        background-color: #FEFFEC;
+        background-image:url(../admin_img/backdrop.png);
+        text-align: center;
+        color: #fff;
+        font-size: 1.4em;
+        font-family: 'Arial Rounded MT', sans-serif;
+        font-weight:400;
+        /*text-shadow: 0px 2px 3px #666 !important;*/
+        text-shadow: 1px 1px 0px #000, 2px 2px 0px #000 !important;
+        opacity:0.9; filter:alpha(opacity=90)
+    }
+
+    .dropbox span, #buttontable .dropbox span {
+        margin-top: -2px !important;
+        display: block;
+    }
+
+    .dropbox.not-available, #buttontable .dropbox.not-available {
+        background-color: #F88;
+    }
+
+    .dropbox.over, #buttontable .dropbox.over {
+        background-color: #bfb;
+    }
+
+     .btn, #buttontable .btn {
+        display: inline-block;
+        padding: 0px 12px;
+        margin-bottom: 0;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 1.42857143;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        cursor: pointer;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
+        background-image: none;
+        border: 1px solid transparent;
+        border-radius: 4px;
+    }
+
+     .btn-success, #buttontable .btn-success {
+        color: #fff;
+        background-color: #5cb85c;
+        border-color: #4cae4c;
+    }
+
+     .fileinput-button {
+        position: relative;
+        overflow: hidden;
+    }
+
+     .fileinput-button input {
+        position: absolute;
+        top: 0;
+        right: 0;
+        margin: 0;
+        opacity: 0;
+        -ms-filter:'alpha(opacity=0)';
+        font-size: 2px;
+        direction: ltr;
+        cursor: pointer;
+    }
+
+    #fileToUpload {
+        width: 60px !important;
+    }
